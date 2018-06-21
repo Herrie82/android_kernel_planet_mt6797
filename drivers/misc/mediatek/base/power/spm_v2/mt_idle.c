@@ -1908,8 +1908,7 @@ static inline int mcidle_select_handler(int cpu)
 {
 	int ret = 0;
 
-	if (
-	) {
+	if (idle_switch[IDLE_TYPE_MC]) {
 		if (mcidle_can_enter(cpu))
 			ret = 1;
 	}
@@ -2845,7 +2844,7 @@ static ssize_t slidle_state_write(struct file *filp, const char __user *userbuf,
 			disable_slidle_by_bit(param);
 
 		return count;
-	} else if (!kstrtoint(cmd_buf, 10, &param)) {
+	} else if (!kstrtoint(userbuf, 10, &param)) {
 		idle_switch[IDLE_TYPE_SL] = param;
 		return count;
 	}
